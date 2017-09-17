@@ -1,0 +1,120 @@
+===============================================================================
+				Cristian Creteanu & George Cristian Munteanu
+									313CA
+===============================================================================
+
+Am mentionat in paranteze cine s-a ocupat de scrierea functiei respective.
+
+   add_movie (Cristian Creteanu)
+   Functia creeaza o variabila de tip movie (aceasta are toate informatiile date
+ca parametru functiei) si o insereaza in map-ul movies.
+   De asemenea, se introduce o noua intrare in set-ul topRecentMovies.
+   Daca regizorul dat ca parametru nu se gaseste in map-ul de regizori, se adauga
+o noua intrare. Daca se afla, atunci se parcurge vectorul actor_ids, se verifica
+rand pe rand daca un element se afla in deja in vectorul de actori cu care a
+colaborat regizorul respectiv si daca nu, se adauga in el.
+   Fiecare actor din actor_ids este cautat in map-ul actors si se compara
+timestamp-ul dat ca parametru functiei cu firstMovie si lastMovie ale actorului.
+Un actor in care firstMovie este gol va avea activitySpan = -1, un actor in care
+lastMovie este gol (a jucat intr-un singur film) va avea activitySpan = 0, iar
+daca niciunul nu este gol, activitySpan va fi diferenta lastMovie - firstMovie.
+   Iau perechi de cate 2 din actor_ids. Daca unul dintre ei nu apare in vectorul
+de colegi (colleagues) al celuilalt, il voi adauga. De asemenea, voi actualiza
+map-ul pairs astfel: daca map-ul nu are cheia (actor1, actor2), voi adauga o
+intrare cu valoarea 1 la aceasta cheie, iar in caz contrar incrementez valoarea
+de la cheia respectiva.
+   Caut fiecare dintre categoriile din care face parte filmul curent in map-ul
+genres. Daca o categorie nu se afla, o introduc in map, iar daca se afla, adaug
+filmul in vectorul de filme care reprezinta valoarea de la cheia data de numele
+categoriei.
+
+   add_user (Cristian Creteanu)
+   In functie adaug in map-ul de useri (users) o noua intrare cu informatiile
+date ca parametru.
+
+   add_actor (Cristian Creteanu)
+   In functie adaug in map-ul de actori (actors) o noua intrare cu informatiile
+date ca parametru.
+
+   add_rating (George Cristian Munteanu) 
+   Adauga o intr-un map o pereche de forma user_id si ratingul pe care il da acel
+actor. In plus, verific daca acest map s-a modificat.
+   
+   get_rating (George Cristian Munteanu) 
+   In prima faza verifica daca a fost dat vreun rating filmului, apoi le aduna pe
+toate si le imparte la numarul lor.
+   
+   update_rating (George Cristian Munteanu) 
+   Scad ratingul initial pe care l-a dat acel utilizator si il adaug pe cel nou.
+
+   remove_rating (George Cristian Munteanu) 
+   Sterg din suma de ratinguri a filmului, ratingul pe care l-a dat utilizatorul meu,
+apoi scad numarul de ratinguri cu 1 si la final sterg intrarea utilizatorului din map
+
+   get_longest_career_actor (Cristian Creteanu)
+   Parcurg fiecare element din unordered map-ul de actori si caut actorul cu
+activitySpan cel mai mare. Daca stringul firstMovie este gol, atunci n-a jucat in
+niciun film si trec la urmatorul actor. Daca doar lastMovie este gol si maximul
+dintre cei parcursi pana acum are tot activitySpan = 0, le compar id-urile si il
+selectez pe cel cu id-ul mai mic din punct de vedere lexico-grafic. Daca niciunul
+dintre cele doua nu este gol, atunci compar activitySpan-ul actorului curent cu
+maximul aflat pana la momentul respectiv si daca este mai mare, actualizez maximul.
+   Returnez "none" daca niciunul dintre actorii din actors nu a jucat in vreun film.
+
+   get_most_influential_director (George Cristian Munteanu) 
+   Verific daca a fost adaugat un director,in caz contrar returnez "none".
+In caz favorabil, iterez prin map si caut directorul care a lucrat cu cei mai multi
+actori si il retin intr-un variabila de tip string.Daca gasesc 2 care au lucrat cu
+acelasi numar de actori il returnez pe primul ordonat dupa id.
+
+
+   get_best_year_for_category (Cristian Creteanu)
+   Daca nu exista o intrare in genres corespunzatoare categoriei data ca parametru,
+se returneaza "none".
+   Parcurg setul ordonat de la cheia reprezentata de categoria data ca parametru.
+Cat timp citesc ani egali, actualizez suma de rating-uri (ratingsSum) si numarul de
+rating-uri, iar in momentul cand am ajuns la un an diferit, calculez average rating
+pentru anul precedent celui nou gasit si compar cu bestYear aflat pana in punctul
+respectiv. Daca niciun film dintre cei parcursi nu are rating, returnez "none".
+Altfel, returnez bestYear.
+
+
+   get_2nd_degree_colleagues (Cristian Creteanu)
+   Iau fiecare dintre colegii de gradul 1 ai actorului dat ca parametru. Caut printre
+colegii de gradul 1 ai fiecaruia dintre cei mentionati precedent si daca gasesc unul
+diferit de actorul dat ca parametru si care nu se afla printre colegii de gradul 1 ai
+actorului dat ca parametru, il salvez intr un vector. La sfarsit ii afisez pe toti cei
+gasiti sau none daca vectorul este gol.
+
+   get_top_k_most_recent_movies (George Cristian Munteanu) 
+   Verific daca a fost adaugat un film,in caz contrar returnez "none". In caz
+favorabil iau primele k elemente filme si le adaug intr-un string urmand apoi sa le
+afisez cu spatiu intre ele.
+
+   get_top_k_actor_pairs (Cristian Creteanu)
+   Variabila bool pairsUpdated va retine daca map-ul de perechi (pairs) este a fost
+actualizat (s-a introdus o noua pereche sau s-a incrementat numarul de filme al unei
+perechi). Daca pairsUpdated este true, atunci actualizez topPairs apeland functia
+flip_pairs pe map-ul pairs. topPairs va fi un map ce va avea ca cheie o structura de
+tipul actorPair, ce contine act1(actorul cu id-ul mai mic dpdv lexico-grafic), act2
+si numarul de filme. Am definit operatorul "<" astfel incat sa fie ordonate
+corespunzator, adica dupa numarul de filme, apoi dupa fiecare id. Afisez primele k
+intrari ale map-ului topPairs sau "none" daca este gol.
+
+   get_top_k_partners_for_actor (Cristian Creteanu)
+   Fac un vector de perechi (string, int) care reprezinta o copie a hashtable-ului
+actors[actor_id].colleagues (actor_id este dat ca parametru, iar colleagues este un
+hashtable care are ca cheie id-ul unui actor cu care a colaborat actorul actor_id si
+ca valoare numarul de filme in care au colaborat). Sortez acest vector dupa numarul
+filme si dupa id-ul colegului. Afisez primele k intrari ale vectorului sau "none"
+daca este gol.
+
+   get_top_k_most_popular_movies (George Cristian Munteanu) 
+   Verific daca a fost adaugat un film, in caz contrar returnez "none". In caz
+favorabil creez un map in care inversez cheia si valoarea, se vor  ordona deoarece
+am definit  operatorul < .Urmand apoi sa iau primele k movies si sa le adaug intr-un
+string urmand apoi sa le afisez cu spatiu intre ele
+	
+   get_avg_rating_in_range (George Cristian Munteanu) 
+   Parcurg map-ul timestamp in care se afla timestamp-ul filmului si id-ul sau.
+Verific daca exista filmul si salvez intr-o variabila average rating.
