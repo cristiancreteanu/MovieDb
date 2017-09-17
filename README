@@ -1,1 +1,18 @@
+A C++ program that simulates a movie database. 
 
+main.cpp is the file that contains the methods which parse the query string and call the necessary function accordingly.
+
+imdb.cpp is the file which contains the methods that interract with the database for queries such as: 
+      add movie/user/actor
+      add/update/remove/get rating
+      get longest career actor
+      get most influential director (based on the number of actor they have worked with)
+      get best year for category (the year that has the best ratings for the specified category)
+      get 2nd degree colleagues (the second degree colleagues of an actor X are those that have not worked directly with X, but with actors that X has worked with)
+      get top k most recent movies
+      get top k actor pairs
+      get top k partners for actor
+      get top k most popular movies
+      get average rating in range (of years)
+      
+I have included several tests in order to show that the program works. Run the check.sh script 
